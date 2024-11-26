@@ -52,6 +52,14 @@ open class ESRefreshFooterAnimator: UIView, ESRefreshProtocol, ESRefreshAnimator
         return indicatorView
     }()
     
+    open var indicatorColor: UIColor = .gray {
+        didSet {
+            if indicatorColor != oldValue {
+                indicatorView.color = indicatorColor
+            }
+        }
+    }
+    
     public override init(frame: CGRect) {
         super.init(frame: frame)
         titleLabel.text = loadingMoreDescription

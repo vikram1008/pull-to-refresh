@@ -56,12 +56,26 @@ public class ESRefreshTableViewController: UITableViewController {
             break
         }
         
-        self.tableView.es.addPullToRefresh(animator: header) { [weak self] in
-            self?.refresh()
+        if type == .defaultWithColor {
+            let header2 = ESRefreshHeaderAnimator.init(frame: CGRect.zero)
+            header2.indicatorColor = UIColor.red
+            self.tableView.es.addPullToRefresh(animator: header2) { [weak self] in
+                self?.refresh()
+            }
+            let footer2 = ESRefreshHeaderAnimator.init(frame: CGRect.zero)
+            footer2.indicatorColor = UIColor.green
+            self.tableView.es.addInfiniteScrolling(animator: footer2) { [weak self] in
+                self?.loadMore()
+            }
+        } else {
+            self.tableView.es.addPullToRefresh(animator: header) { [weak self] in
+                self?.refresh()
+            }
+            self.tableView.es.addInfiniteScrolling(animator: footer) { [weak self] in
+                self?.loadMore()
+            }
         }
-        self.tableView.es.addInfiniteScrolling(animator: footer) { [weak self] in
-            self?.loadMore()
-        }
+        
         self.tableView.refreshIdentifier = String.init(describing: type)
         self.tableView.expiredTimeInterval = 20.0
         

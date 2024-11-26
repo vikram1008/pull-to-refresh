@@ -15,6 +15,7 @@ public enum ESRefreshExampleType: String {
     case textView = "TextView"
     case day = "Day"
     case collectionView = "CollectionView"
+    case defaultWithColor = "Default With Color"
 }
 
 public enum ESRefreshExampleListType {
@@ -32,7 +33,8 @@ public class ViewController: UIViewController, UITableViewDataSource, UITableVie
         .wechat,
         .textView,
         .day,
-        .collectionView]
+        .collectionView,
+        .defaultWithColor]
     
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,6 +74,11 @@ public class ViewController: UIViewController, UITableViewDataSource, UITableVie
             vc = ESRefreshTableViewController.init(style: .plain)
         case .collectionView:
             vc = CollectionViewController()
+        case .defaultWithColor:
+            vc = ESRefreshTableViewController.init(style: .plain)
+            if let vc = vc as? ESRefreshTableViewController {
+                vc.type = .defaultWithColor
+            }
         }
         vc.title = element.rawValue
         self.navigationController?.pushViewController(vc, animated: true)

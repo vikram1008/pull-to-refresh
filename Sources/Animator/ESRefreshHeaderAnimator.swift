@@ -44,6 +44,14 @@ open class ESRefreshHeaderAnimator: UIView, ESRefreshProtocol, ESRefreshAnimator
     open var trigger: CGFloat = 60.0
     open var executeIncremental: CGFloat = 60.0
     open var state: ESRefreshViewState = .pullToRefresh
+    
+    open var indicatorColor: UIColor = .gray {
+        didSet {
+            if indicatorColor != oldValue {
+                indicatorView.color = indicatorColor
+            }
+        }
+    }
 
     fileprivate let imageView: UIImageView = {
         let imageView = UIImageView.init()
